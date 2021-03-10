@@ -1,5 +1,6 @@
 namespace PROEVENTOS.API.Models
-{
+{ 
+  
     public class Evento
     {
       public int EvenId { get; set; }  

@@ -54,12 +54,13 @@ namespace PROEVENTOS.API.Controllers
            return "post"; 
         }
 
+
         [HttpPut("{id}")]
         public string Put(int id)
         {
            return $"exemplo de put com id = {id}";
         }
-
+ 
         [HttpDelete("{id}")]
         public string HttpDelete(int id)
         {
