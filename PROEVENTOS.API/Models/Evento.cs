@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace PROEVENTOS.API.Models
 { 
-  
+    [Keyless]
     public class Evento
     {
       public int EvenId { get; set; }  

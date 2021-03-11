@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PROEVENTOS.API.Data;
 using PROEVENTOS.API.Models;
 
 namespace PROEVENTOS.API.Controllers
@@ -13,37 +14,29 @@ namespace PROEVENTOS.API.Controllers
     public class EventoController : ControllerBase
     {
 
-        public IEnumerable<Evento> _evento  = new Evento[]{
+        
+        private readonly DataContext _context;
 
-            new Evento(){ 
-                EvenId = 1,
-                Tema = "Curso Angular",
-                Local = "São Paulo",
-                Lote = "1",
-                QtdPessoas = 250,
-                DataEvento = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy")  
-                },
-                new Evento(){ 
-                EvenId = 2,
-                Tema = "Curso sql",
-                Local = "São Paulo",
-                Lote = "1",
-                QtdPessoas = 250,
-                DataEvento = DateTime.Now.AddHours(2).ToString("dd/MM/yyyy")  
-                }
-  
-        };
-
-        public EventoController()
+        public EventoController(DataContext context)
         {
+            _context = context;
+
         }
 
 
         [HttpGet]
         public IEnumerable<Evento> Get()
         {
- 
-           return _evento;
+
+            return _context.Eventos;
+
+        }
+
+        [HttpGet("{id}")]
+        public Evento GetById(int id)
+        {
+
+            return _context.Eventos.FirstOrDefault(evento => evento.EvenId == id);
 
         }
 
@@ -51,20 +44,20 @@ namespace PROEVENTOS.API.Controllers
         [HttpPost]
         public string Post()
         {
-           return "post"; 
+            return "post";
         }
 
 
         [HttpPut("{id}")]
         public string Put(int id)
         {
-           return $"exemplo de put com id = {id}";
+            return $"exemplo de put com id = {id}";
         }
- 
+
         [HttpDelete("{id}")]
         public string HttpDelete(int id)
         {
-           return $"exemplo de delete com id = {id}";
+            return $"exemplo de delete com id = {id}";
         }
     }
 }
